@@ -28,9 +28,14 @@ app.get('/news/:id', (req, res) => {
 })
 
 app.get('/catagories/:id', (req, res) => {
-    const id = req.params.id;
-    const selectedNews = news.filter(n => n.category_id === id)
-    res.send(selectedNews)
+    const id = parseInt(req.params.id);
+    if (id === 0) {
+        res.send(news)
+    }
+    else {
+        const selectedNews = news.filter(n => parseInt(n.category_id) === id)
+        res.send(selectedNews)
+    }
 })
 
 app.listen(port, () => {
